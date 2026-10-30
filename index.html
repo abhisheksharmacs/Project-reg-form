@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KIET University project registration form for student teams.">
+  <title>Project Registration Form | KIET University</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #172b3a;
+      background: #edf1f4;
+      font-synthesis: none;
+      --navy: #07364f;
+      --orange: #e86c27;
+      --muted: #60717d;
+      --line: #d6dfe4;
+      --soft: #f3f6f8;
+      --danger: #a32d28;
+      --success: #17613c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 28px 16px;
+    }
+
+    .sheet {
+      width: min(100%, 210mm);
+      margin: 0 auto;
+      padding: 12mm 13mm;
+      background: #fff;
+      box-shadow: 0 5px 24px #172b3a1c;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--orange);
+    }
+
+    .logo {
+      display: block;
+      width: min(222px, 42%);
+      height: auto;
+      flex: 0 1 auto;
+    }
+
+    .institution {
+      flex: 1;
+      text-align: center;
+    }
+
+    .institution h1 {
+      margin: 0 0 5px;
+      color: var(--navy);
+      font-size: 22px;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .institution p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .page-title {
+      margin: 22px 0 16px;
+      text-align: center;
+    }
+
+    .page-title h2 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 21px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notice,
+    .message {
+      padding: 12px 14px;
+      border: 1px solid #e8c99a;
+      border-left: 4px solid var(--orange);
+      border-radius: 5px;
+      background: #fff9f0;
+      color: #60431e;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .notice {
+      margin: 0 0 18px;
+    }
+
+    .message {
+      display: none;
+      margin: 16px 0 0;
+    }
+
+    .message.visible {
+      display: block;
+    }
+
+    .message.error {
+      border-color: #e6b6b3;
+      border-left-color: var(--danger);
+      background: #fff5f4;
+      color: var(--danger);
+    }
+
+    .message.success {
+      border-color: #acd3bb;
+      border-left-color: var(--success);
+      background: #f1faf4;
+      color: var(--success);
+    }
+
+    .section {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: -1px 0 14px;
+      break-after: avoid;
+    }
+
+    .section-number {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .section-heading h3 {
+      margin: 2px 0 3px;
+      color: var(--navy);
+      font-size: 15px;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px 16px;
+    }
+
+    .grid.one-column {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 5px;
+      color: #344755;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .grid > .full {
+      grid-column: 1 / -1;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 39px;
+      padding: 9px 10px;
+      border: 1px solid #c7d1d7;
+      border-radius: 4px;
+      outline-color: var(--orange);
+      background: #fff;
+      color: #172b3a;
+      font: 400 13px Arial, Helvetica, sans-serif;
+    }
+
+    .field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .field textarea.short {
+      min-height: 68px;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 2px #07364f18;
+    }
+
+    .field input:disabled,
+    .field select:disabled {
+      background: #f0f3f5;
+      color: #657681;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .required {
+      color: var(--orange);
+    }
+
+    .member-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .member-count {
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .member-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .member-card {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fcfdfe;
+    }
+
+    .member-card.leader {
+      border-color: #b6c8d1;
+      background: #f3f7f9;
+    }
+
+    .member-card-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 11px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .leader-badge {
+      margin-left: 6px;
+      padding: 3px 7px;
+      border-radius: 20px;
+      background: #dfeaf0;
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 14px;
+      border: 1px solid var(--navy);
+      border-radius: 4px;
+      background: var(--navy);
+      color: #fff;
+      cursor: pointer;
+      font: 600 12px Arial, Helvetica, sans-serif;
+    }
+
+    .button:hover:not(:disabled) {
+      background: #0c4c6c;
+    }
+
+    .button.secondary {
+      background: #fff;
+      color: var(--navy);
+    }
+
+    .button.secondary:hover:not(:disabled) {
+      background: #f0f5f7;
+    }
+
+    .button.remove {
+      min-height: 30px;
+      padding: 5px 9px;
+      border-color: #d7aeab;
+      background: #fff;
+      color: var(--danger);
+      font-size: 11px;
+    }
+
+    .button.remove:hover:not(:disabled) {
+      background: #fff5f4;
+    }
+
+    .button:disabled {
+      border-color: #c4cdd2;
+      background: #e9edef;
+      color: #87949b;
+      cursor: not-allowed;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 14px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #344755;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .choice input {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 15px;
+      margin: 1px 0 0;
+      accent-color: var(--navy);
+    }
+
+    .sdg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    .upload-label .hint {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .upload-status {
+      grid-column: 1 / -1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .approval-status {
+      display: inline-block;
+      padding: 7px 10px;
+      border: 1px solid #e8c99a;
+      border-radius: 4px;
+      background: #fff9f0;
+      color: #60431e;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: #71808a;
+      font-size: 10px;
+    }
+
+    .guide-approval {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1.5px solid var(--navy);
+      border-radius: 6px;
+      break-inside: avoid;
+    }
+
+    .guide-approval h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 14px;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .guide-approval p {
+      margin: 0 0 13px;
+      color: #344755;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .approval-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      margin-bottom: 18px;
+      color: #344755;
+      font-size: 12px;
+    }
+
+    .approval-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .approval-box {
+      width: 13px;
+      height: 13px;
+      border: 1px solid #536571;
+    }
+
+    .guide-signature-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr 0.7fr;
+      gap: 24px;
+    }
+
+    .signature-line {
+      min-height: 31px;
+      padding-top: 18px;
+      border-bottom: 1px solid #65727a;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .guide-comments {
+      min-height: 46px;
+      margin-top: 13px;
+      padding-top: 5px;
+      border-bottom: 1px solid #65727a;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .panel-marking {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1.5px solid var(--navy);
+      border-radius: 6px;
+    }
+
+    .panel-marking h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 15px;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .panel-marking > p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .panel-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      color: #344755;
+      font-size: 11px;
+    }
+
+    .panel-table th,
+    .panel-table td {
+      padding: 8px 7px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .panel-table th {
+      background: var(--soft);
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .panel-table .panel-number {
+      width: 12%;
+      text-align: center;
+    }
+
+    .panel-table .panel-name {
+      width: 25%;
+    }
+
+    .panel-table .panel-marks {
+      width: 16%;
+    }
+
+    .panel-table .panel-signature {
+      width: 22%;
+    }
+
+    .panel-table .panel-remarks {
+      width: 25%;
+    }
+
+    .panel-table td {
+      height: 45px;
+    }
+
+    .panel-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 15px;
+    }
+
+    .panel-summary .signature-line {
+      min-height: 31px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px 8px;
+      }
+
+      .sheet {
+        padding: 22px 16px;
+      }
+
+      .masthead {
+        gap: 12px;
+      }
+
+      .institution h1 {
+        font-size: 16px;
+      }
+
+      .institution p {
+        font-size: 11px;
+      }
+
+      .page-title h2 {
+        font-size: 18px;
+      }
+
+      .section {
+        padding: 13px 11px;
+      }
+
+      .grid,
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sdg-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .member-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm;
+      }
+
+      :root,
+      body {
+        background: #fff;
+        color: #111;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      body {
+        padding: 0;
+        font-size: 9pt;
+      }
+
+      .sheet {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .masthead {
+        gap: 12px;
+        padding-bottom: 7px;
+        border-bottom-width: 2px;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+      .institution h1 {
+        margin-bottom: 2px;
+        font-size: 15pt;
+      }
+
+      .institution p {
+        font-size: 8.5pt;
+        line-height: 1.3;
+      }
+
+      .page-title {
+        margin: 10px 0 8px;
+      }
+
+      .page-title h2 {
+        margin-bottom: 3px;
+        font-size: 13pt;
+      }
+
+      .page-title p {
+        font-size: 8pt;
+      }
+
+      .button,
+      .form-actions,
+      .notice,
+      .message {
+        display: none !important;
+      }
+
+      .section {
+        margin-top: 9px;
+        padding: 8px;
+        border-radius: 0;
+      }
+
+      .section-heading {
+        gap: 7px;
+        margin: 0 0 7px;
+      }
+
+      .section-number {
+        width: 20px;
+        height: 20px;
+        flex-basis: 20px;
+        font-size: 8pt;
+      }
+
+      .section-heading h3 {
+        margin: 1px 0 2px;
+        font-size: 9.5pt;
+      }
+
+      .section-heading p {
+        font-size: 7.5pt;
+        line-height: 1.3;
+      }
+
+      .grid {
+        column-gap: 10px;
+        row-gap: 6px;
+      }
+
+      .field {
+        gap: 3px;
+        font-size: 8pt;
+      }
+
+      .hint {
+        font-size: 7pt;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        min-height: 25px;
+        padding: 4px 5px;
+        border-radius: 0;
+        font-size: 8pt;
+      }
+
+      .field textarea,
+      .field textarea.short {
+        min-height: 38px;
+        resize: none;
+      }
+
+      .member-toolbar {
+        margin-bottom: 7px;
+      }
+
+      .member-count {
+        font-size: 8pt;
+      }
+
+      .member-list {
+        gap: 6px;
+      }
+
+      .member-card {
+        padding: 7px;
+        border-radius: 0;
+      }
+
+      .member-card-heading {
+        margin-bottom: 6px;
+        font-size: 8pt;
+      }
+
+      .leader-badge {
+        padding: 2px 5px;
+        font-size: 7pt;
+      }
+
+      .choice,
+      .approval-options {
+        font-size: 8pt;
+      }
+
+      .choice-grid,
+      .sdg-grid {
+        gap: 5px 8px;
+        padding: 7px;
+      }
+
+      .choice input {
+        width: 12px;
+        height: 12px;
+        flex-basis: 12px;
+      }
+
+      .approval-status {
+        padding: 4px 6px;
+        font-size: 8pt;
+      }
+
+      .guide-approval {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 0;
+      }
+
+      .guide-approval h3 {
+        margin-bottom: 5px;
+        font-size: 10pt;
+      }
+
+      .guide-approval p {
+        margin-bottom: 8px;
+        font-size: 8pt;
+      }
+
+      .approval-options {
+        gap: 7px 18px;
+        margin-bottom: 12px;
+      }
+
+      .approval-box {
+        width: 11px;
+        height: 11px;
+      }
+
+      .guide-signature-grid {
+        gap: 18px;
+      }
+
+      .signature-line {
+        min-height: 26px;
+        padding-top: 15px;
+        font-size: 7.5pt;
+      }
+
+      .guide-comments {
+        min-height: 34px;
+        margin-top: 8px;
+        font-size: 7.5pt;
+      }
+
+      .panel-marking {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1.5px solid var(--navy);
+        border-radius: 0;
+        break-inside: avoid;
+      }
+
+      .panel-marking h3 {
+        font-size: 10pt;
+      }
+
+      .panel-marking > p,
+      .panel-table {
+        font-size: 7.5pt;
+      }
+
+      .panel-table th,
+      .panel-table td {
+        padding: 5px;
+      }
+
+      .panel-table td {
+        height: 35px;
+      }
+
+      .panel-summary {
+        margin-top: 10px;
+      }
+
+      .panel-summary .signature-line {
+        min-height: 26px;
+        padding-top: 15px;
+        font-size: 7.5pt;
+      }
+
+      input,
+      select,
+      textarea {
+        color: #172b3a !important;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        border-color: #aab5bc;
+      }
+
+      .section-heading,
+      .guide-approval {
+        break-inside: avoid;
+      }
+
+      .member-card,
+      .choice-grid,
+      .sdg-grid {
+        break-inside: avoid;
+      }
+
+      .form-footer {
+        margin-top: 10px;
+        padding-top: 6px;
+        font-size: 7pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <header class="masthead">
+      <img class="logo" src="KIET-Logo.webp" alt="KIET University">
+      <div class="institution">
+        <h1>KIET University</h1>
+        <p>Department of CS and CSE - DS</p>
+        <p>Project Registration</p>
+      </div>
+    </header>
+
+    <div class="page-title">
+      <h2>Project Registration Form</h2>
+      <p>Tell us about your team, the problem you are addressing, and your proposed contribution.</p>
+    </div>
+
+    <aside class="notice" role="note">
+      <strong>Registration portal preview:</strong> This standalone HTML page validates entries in your browser only. Project ID checks, cross-team enrollment checks, guide assignment, and saving require the university registration service.
+    </aside>
+
+    <form id="project-form" novalidate>
+      <section class="section" aria-labelledby="team-heading">
+        <div class="section-heading">
+          <span class="section-number">A</span>
+          <div>
+            <h3 id="team-heading">Team Information</h3>
+            <p>Enter the project ID assigned to this registration.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <label class="field">
+            Project ID <span class="required" aria-hidden="true">*</span>
+            <input name="projectId" required maxlength="100">
+          </label>
+          <label class="field">
+            Team Leader Name <span class="required" aria-hidden="true">*</span>
+            <input name="leaderName" autocomplete="name" required>
+          </label>
+          <label class="field">
+            Team Leader Enrollment Number <span class="required" aria-hidden="true">*</span>
+            <input name="leaderEnrollment" required>
+          </label>
+          <label class="field">
+            Team Leader Email ID <span class="required" aria-hidden="true">*</span>
+            <input type="email" name="leaderEmail" autocomplete="email" required>
+          </label>
+          <label class="field">
+            Team Leader Contact Number <span class="required" aria-hidden="true">*</span>
+            <input type="tel" name="leaderContact" autocomplete="tel" inputmode="tel" aria-describedby="contact-hint" required>
+            <span class="hint" id="contact-hint">Enter a valid number containing 10–15 digits; a leading + is allowed.</span>
+          </label>
+          <label class="field">
+            Department <span class="required" aria-hidden="true">*</span>
+            <select name="department" required>
+              <option value="">Select department</option>
+              <option>Computer Science</option>
+              <option>Computer Science and Engineering - Data Science</option>
+              <option>Information Technology</option>
+              <option>Electronics and Communication</option>
+              <option>Electrical and Electronics</option>
+              <option>Mechanical Engineering</option>
+              <option>Civil Engineering</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field">
+            Academic Year <span class="required" aria-hidden="true">*</span>
+            <select name="academicYear" required>
+              <option value="">Select academic year</option>
+              <option>2025-26</option><option>2026-27</option><option>2027-28</option>
+              <option>2028-29</option><option>2029-30</option><option>2030-31</option>
+            </select>
+          </label>
+          <label class="field">
+            Semester / Year of Study <span class="required" aria-hidden="true">*</span>
+            <select name="leaderYear" required>
+              <option value="">Select year / semester</option>
+              <option>Year 1 - Semester 1</option><option>Year 1 - Semester 2</option>
+              <option>Year 2 - Semester 3</option><option>Year 2 - Semester 4</option>
+              <option>Year 3 - Semester 5</option><option>Year 3 - Semester 6</option>
+              <option>Year 4 - Semester 7</option><option>Year 4 - Semester 8</option>
+            </select>
+          </label>
+          <div class="field" aria-live="polite">
+            Team Size
+            <output class="member-count" id="team-size">1 member</output>
+            <span class="hint" id="member-limits"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="members-heading">
+        <div class="section-heading">
+          <span class="section-number">B</span>
+          <div>
+            <h3 id="members-heading">Team Member Details</h3>
+            <p>The team leader is listed in Section A. Add the remaining members below; enrollment numbers must be unique within this team.</p>
+          </div>
+        </div>
+        <div class="member-toolbar">
+          <span class="member-count" id="member-count" aria-live="polite">0 additional members · 1 total including leader</span>
+          <button class="button secondary" id="add-member" type="button">Add team member</button>
+        </div>
+        <div class="member-list" id="member-list" aria-live="polite"></div>
+      </section>
+
+      <section class="section" aria-labelledby="project-heading">
+        <div class="section-heading">
+          <span class="section-number">C</span>
+          <div>
+            <h3 id="project-heading">Project Details</h3>
+            <p>Focus on the problem, who it affects, and what your team will contribute—not only the tools you plan to use.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <label class="field">
+            Project Title <span class="required" aria-hidden="true">*</span>
+            <input name="projectTitle" required maxlength="200">
+          </label>
+          <label class="field">
+            Project Domain <span class="required" aria-hidden="true">*</span>
+            <select name="projectDomain" id="project-domain" required>
+              <option value="">Select project domain</option>
+              <option>Artificial Intelligence</option>
+              <option>Machine Learning</option>
+              <option>Data Science</option>
+              <option>Web Development</option>
+              <option>Internet of Things</option>
+              <option>Cybersecurity</option>
+              <option>Cloud Computing</option>
+              <option>Robotics and Automation</option>
+              <option>Blockchain</option>
+              <option>Healthcare Technology</option>
+              <option>Education Technology</option>
+              <option>Sustainability and Environment</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field full">
+            Problem Statement <span class="required" aria-hidden="true">*</span>
+            <textarea name="problemStatement" required minlength="30" aria-describedby="problem-hint"></textarea>
+            <span class="hint" id="problem-hint">Clearly describe the problem, its context, and why it matters (at least 30 characters).</span>
+          </label>
+          <label class="field">
+            Project Abstract
+            <textarea class="short" name="projectAbstract"></textarea>
+          </label>
+          <label class="field">
+            Project Objectives
+            <textarea class="short" name="projectObjectives"></textarea>
+          </label>
+          <label class="field">
+            Proposed Solution
+            <textarea class="short" name="proposedSolution"></textarea>
+          </label>
+          <label class="field">
+            Innovation and Novelty
+            <textarea class="short" name="innovationNovelty"></textarea>
+          </label>
+          <label class="field">
+            Target Users / Beneficiaries
+            <textarea class="short" name="targetUsers"></textarea>
+          </label>
+          <label class="field">
+            Expected Outcomes
+            <textarea class="short" name="expectedOutcomes"></textarea>
+          </label>
+          <label class="field full">
+            Technologies and Tools
+            <textarea class="short" name="technologies" placeholder="List relevant languages, frameworks, libraries, platforms, or hardware. Explain their role in your proposed solution."></textarea>
+          </label>
+          <div class="field full">
+            Sustainable Development Goals (SDGs)
+            <span class="hint">Select every goal that is relevant to your project.</span>
+          </div>
+          <div class="sdg-grid full" role="group" aria-label="Sustainable Development Goals">
+            <label class="choice"><input type="checkbox" name="sdgs" value="1"> 1. No Poverty</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="2"> 2. Zero Hunger</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="3"> 3. Good Health and Well-being</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="4"> 4. Quality Education</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="5"> 5. Gender Equality</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="6"> 6. Clean Water and Sanitation</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="7"> 7. Affordable and Clean Energy</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="8"> 8. Decent Work and Economic Growth</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="9"> 9. Industry, Innovation and Infrastructure</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="10"> 10. Reduced Inequalities</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="11"> 11. Sustainable Cities and Communities</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="12"> 12. Responsible Consumption and Production</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="13"> 13. Climate Action</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="14"> 14. Life Below Water</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="15"> 15. Life on Land</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="16"> 16. Peace, Justice and Strong Institutions</label>
+            <label class="choice"><input type="checkbox" name="sdgs" value="17"> 17. Partnerships for the Goals</label>
+          </div>
+          <label class="field full">
+            SDG Justification
+            <textarea class="short" name="sdgJustification" placeholder="Explain how your project contributes to the selected goal(s)."></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="research-heading">
+        <div class="section-heading">
+          <span class="section-number">D</span>
+          <div>
+            <h3 id="research-heading">Research and Innovation</h3>
+            <p>Describe the gap in existing work and the specific technical contribution your team intends to make.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <label class="field">
+            Existing Solutions or Related Work
+            <textarea class="short" name="relatedWork"></textarea>
+          </label>
+          <label class="field">
+            Limitations of Existing Solutions
+            <textarea class="short" name="existingLimitations"></textarea>
+          </label>
+          <label class="field">
+            Research Gap or Unresolved Problem
+            <textarea class="short" name="researchGap"></textarea>
+          </label>
+          <label class="field">
+            Proposed Technical Contribution
+            <textarea class="short" name="technicalContribution"></textarea>
+          </label>
+          <label class="field">
+            Expected Innovation or Improvement
+            <textarea class="short" name="expectedInnovation"></textarea>
+          </label>
+          <label class="field">
+            Availability of Datasets, Hardware, or Other Resources
+            <textarea class="short" name="availableResources"></textarea>
+          </label>
+          <fieldset class="field full" style="border: 0; padding: 0; margin: 0;">
+            <legend>Potential Project Outcomes</legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="potentialOutcomes" value="Research publication"> Research publication</label>
+              <label class="choice"><input type="checkbox" name="potentialOutcomes" value="Patent filing"> Patent filing</label>
+              <label class="choice"><input type="checkbox" name="potentialOutcomes" value="Product development"> Product development</label>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="guide-heading">
+        <div class="section-heading">
+          <span class="section-number">E</span>
+          <div>
+            <h3 id="guide-heading">Faculty Guide Details</h3>
+            <p>Enter faculty guide details manually. Guide preference is optional.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <label class="field">
+            Preferred Faculty Guide
+            <input name="preferredGuide" autocomplete="off" placeholder="Enter guide name">
+          </label>
+          <label class="field">
+            Guide Department
+            <input name="guideDepartment" placeholder="Enter department">
+          </label>
+          <label class="field">
+            Guide Email
+            <input type="email" name="guideEmail" placeholder="Enter guide email">
+          </label>
+          <label class="field">
+            Co-guide, if applicable
+            <input name="coGuide" autocomplete="off" placeholder="Enter co-guide name, if applicable">
+          </label>
+          <div class="field full">
+            Guide Approval Status
+            <span class="approval-status" aria-label="Guide approval status: managed by the system">Managed by administrator</span>
+            <span class="hint">Students cannot edit guide approval status.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="message" id="form-message" role="status" aria-live="polite"></div>
+      <div class="form-actions">
+        <button class="button secondary" type="reset">Clear form</button>
+        <button class="button" type="submit">Print Form</button>
+      </div>
+    </form>
+
+    <section class="guide-approval" aria-labelledby="guide-approval-heading">
+      <h3 id="guide-approval-heading">Faculty Guide Verification &amp; Approval</h3>
+      <p>
+        I have reviewed and verified the project registration details and proposal. Please mark the appropriate recommendation.
+      </p>
+      <div class="approval-options" aria-label="Guide recommendation">
+        <span class="approval-option"><span class="approval-box" aria-hidden="true"></span>Approved for Panel Presentation</span>
+        <span class="approval-option"><span class="approval-box" aria-hidden="true"></span>Revisions Required</span>
+        <span class="approval-option"><span class="approval-box" aria-hidden="true"></span>Not Approved</span>
+      </div>
+      <div class="guide-signature-grid">
+        <div class="signature-line">Faculty Guide Name</div>
+        <div class="signature-line">Guide Signature</div>
+        <div class="signature-line">Date</div>
+      </div>
+      <div class="guide-comments">Guide Remarks</div>
+    </section>
+
+    <section class="panel-marking" aria-labelledby="panel-marking-heading">
+      <h3 id="panel-marking-heading">Panel Marking</h3>
+      <p>For use by the three panel members during project evaluation.</p>
+      <table class="panel-table">
+        <thead>
+          <tr>
+            <th class="panel-number" scope="col">Panel Member</th>
+            <th class="panel-name" scope="col">Name</th>
+            <th class="panel-marks" scope="col">Marks</th>
+            <th class="panel-signature" scope="col">Signature</th>
+            <th class="panel-remarks" scope="col">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th class="panel-number" scope="row">1</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th class="panel-number" scope="row">2</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th class="panel-number" scope="row">3</th><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="panel-summary">
+        <div class="signature-line">Total Marks / Result</div>
+        <div class="signature-line">Panel Coordinator Signature</div>
+      </div>
+    </section>
+
+    <footer class="form-footer">
+      <span>KIET University · Department of CS and CSE - DS</span>
+      <span>Project Registration</span>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const MEMBER_LIMITS = { minimum: 2, maximum: 5 };
+      const form = document.querySelector("#project-form");
+      const memberList = document.querySelector("#member-list");
+      const memberCount = document.querySelector("#member-count");
+      const teamSize = document.querySelector("#team-size");
+      const memberLimits = document.querySelector("#member-limits");
+      const addMemberButton = document.querySelector("#add-member");
+      const message = document.querySelector("#form-message");
+      const leaderFields = {
+        name: form.elements.leaderName,
+        enrollment: form.elements.leaderEnrollment,
+        email: form.elements.leaderEmail,
+        department: form.elements.department,
+        year: form.elements.leaderYear
+      };
+      const members = [];
+      let nextMemberId = 1;
+
+      memberLimits.textContent = `Minimum ${MEMBER_LIMITS.minimum}; maximum ${MEMBER_LIMITS.maximum}, including the leader.`;
+
+      function createField(labelText, name, type, value = "") {
+        const label = document.createElement("label");
+        label.className = "field";
+        const title = document.createElement("span");
+        title.textContent = labelText;
+        const input = document.createElement("input");
+        input.name = name;
+        input.type = type;
+        input.value = value;
+        input.required = true;
+        if (type === "email") input.autocomplete = "email";
+        label.append(title, input);
+        return { label, input };
+      }
+
+      function createSelect(labelText, name, options, value = "") {
+        const label = document.createElement("label");
+        label.className = "field";
+        const title = document.createElement("span");
+        title.textContent = labelText;
+        const select = document.createElement("select");
+        select.name = name;
+        select.required = true;
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Select";
+        select.append(placeholder);
+        for (const optionText of options) {
+          const option = document.createElement("option");
+          option.value = optionText;
+          option.textContent = optionText;
+          select.append(option);
+        }
+        select.value = value;
+        label.append(title, select);
+        return { label, input: select };
+      }
+
+      function updateMembers() {
+        const additionalCount = members.length;
+        const totalCount = additionalCount + 1;
+        memberCount.textContent = `${additionalCount} additional ${additionalCount === 1 ? "member" : "members"} · ${totalCount} total including leader`;
+        teamSize.textContent = `${totalCount} ${totalCount === 1 ? "member" : "members"}`;
+        addMemberButton.disabled = totalCount >= MEMBER_LIMITS.maximum;
+        addMemberButton.setAttribute("aria-disabled", String(addMemberButton.disabled));
+      }
+
+      function addMember() {
+        if (members.length + 1 >= MEMBER_LIMITS.maximum) return;
+        const id = nextMemberId++;
+        const card = document.createElement("article");
+        card.className = "member-card";
+        const heading = document.createElement("div");
+        heading.className = "member-card-heading";
+        const title = document.createElement("span");
+        title.textContent = `Member ${members.length + 2}`;
+        const remove = document.createElement("button");
+        remove.className = "button remove";
+        remove.type = "button";
+        remove.textContent = "Remove";
+        remove.setAttribute("aria-label", `Remove member ${members.length + 2}`);
+        heading.append(title, remove);
+
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        const controls = [
+          createField("Full Name", `member${id}Name`, "text"),
+          createField("Enrollment / Roll Number", `member${id}Enrollment`, "text"),
+          createField("Email ID", `member${id}Email`, "email"),
+          createSelect("Department", `member${id}Department`, departmentOptions, form.elements.department.value),
+          createSelect("Branch", `member${id}Branch`, branchOptions),
+          createSelect("Year / Semester", `member${id}Year`, yearOptions, form.elements.leaderYear.value)
+        ];
+        for (const control of controls) grid.append(control.label);
+        card.append(heading, grid);
+        const member = { id, card, controls };
+        members.push(member);
+        memberList.append(card);
+        remove.addEventListener("click", () => {
+          const index = members.indexOf(member);
+          if (index < 0) return;
+          members.splice(index, 1);
+          card.remove();
+          renumberMembers();
+          updateMembers();
+          showMessage("", "");
+        });
+        updateMembers();
+      }
+
+      function renumberMembers() {
+        for (const [index, member] of members.entries()) {
+          const heading = member.card.querySelector(".member-card-heading span");
+          heading.textContent = `Member ${index + 2}`;
+          const remove = member.card.querySelector(".remove");
+          if (remove) remove.setAttribute("aria-label", `Remove member ${index + 2}`);
+        }
+      }
+
+      function showMessage(kind, text) {
+        message.className = "message";
+        message.textContent = text;
+        if (kind) message.classList.add("visible", kind);
+      }
+
+      function validateMembers() {
+        const errors = [];
+        const enrollments = new Map();
+        const totalCount = members.length + 1;
+        if (totalCount < MEMBER_LIMITS.minimum) {
+          errors.push(`Add at least ${MEMBER_LIMITS.minimum - 1} additional team member(s); the minimum team size is ${MEMBER_LIMITS.minimum} including the leader.`);
+        }
+        if (totalCount > MEMBER_LIMITS.maximum) {
+          errors.push(`A team can have no more than ${MEMBER_LIMITS.maximum} members.`);
+        }
+        const allEnrollments = [
+          leaderFields.enrollment.value,
+          ...members.map((member) => member.controls[1].input.value)
+        ];
+        for (const [index, value] of allEnrollments.entries()) {
+          const enrollment = value.trim().toLocaleLowerCase();
+          if (!enrollment) continue;
+          const previousIndex = enrollments.get(enrollment);
+          if (previousIndex !== undefined) {
+            errors.push(`Member ${index + 1} has the same enrollment number as member ${previousIndex + 1}. Enrollment numbers must be unique within a team.`);
+          } else {
+            enrollments.set(enrollment, index);
+          }
+        }
+        return errors;
+      }
+
+      function validateContact() {
+        const contact = form.elements.leaderContact;
+        const digits = contact.value.replace(/\D/g, "");
+        const validFormat = /^\+?[0-9\s()-]+$/.test(contact.value.trim());
+        contact.setCustomValidity(contact.value.trim() && (!validFormat || digits.length < 10 || digits.length > 15)
+          ? "Enter a contact number containing 10 to 15 digits."
+          : "");
+      }
+
+      const departmentOptions = [
+        "Computer Science",
+        "Computer Science and Engineering - Data Science",
+        "Information Technology",
+        "Electronics and Communication",
+        "Electrical and Electronics",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Other"
+      ];
+      const branchOptions = [
+        "Computer Science and Engineering",
+        "Computer Science and Engineering - Data Science",
+        "Computer Science and Engineering - Artificial Intelligence",
+        "Information Technology",
+        "Electronics and Communication Engineering",
+        "Electrical and Electronics Engineering",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Other"
+      ];
+      const yearOptions = [
+        "Year 1 - Semester 1", "Year 1 - Semester 2",
+        "Year 2 - Semester 3", "Year 2 - Semester 4",
+        "Year 3 - Semester 5", "Year 3 - Semester 6",
+        "Year 4 - Semester 7", "Year 4 - Semester 8"
+      ];
+
+      updateMembers();
+      addMemberButton.addEventListener("click", addMember);
+      form.elements.leaderContact.addEventListener("input", validateContact);
+      form.addEventListener("reset", () => {
+        window.setTimeout(() => {
+          while (members.length > 0) {
+            members.pop().card.remove();
+          }
+          nextMemberId = 1;
+          updateMembers();
+          showMessage("", "");
+        }, 0);
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        validateContact();
+        const memberErrors = validateMembers();
+        const invalidFields = Array.from(form.elements).filter((element) =>
+          typeof element.checkValidity === "function" && !element.checkValidity()
+        );
+        const errors = [...memberErrors];
+        if (invalidFields.length) errors.unshift("Complete all required fields and correct any invalid email addresses or contact numbers.");
+        if (errors.length) {
+          showMessage("error", errors.join(" "));
+          const firstInvalid = invalidFields[0];
+          if (firstInvalid) firstInvalid.focus();
+          else if (members.length + 1 < MEMBER_LIMITS.minimum) addMemberButton.focus();
+          message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          return;
+        }
+        showMessage("success", "Form validated. The print dialog is opening.");
+        message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        window.print();
+      });
+    })();
+  </script>
+</body>
+</html>
